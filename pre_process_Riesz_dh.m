@@ -43,9 +43,9 @@ h=-hx^alpha;
 
 %% Define RHS A matrix
 % u = 0.1; v = 0.1;               % for constant wind implementation 
-for j = 1:(N-1)                 % 每一行
-	for i = 1:(M-1)             % 每一列
-		if i~=1 && i~=(M-1)     % in x dirction, (i,j) is not next to a boundary point%i为列变化
+for j = 1:(N-1)                 %row
+	for i = 1:(M-1)             %col
+		if i~=1 && i~=(M-1)     % in x dirction, (i,j) is not next to a boundary point% i is col changes
 			A((j-1)*(M-1)+i, (j-1)*(M-1)+i) = K*g(0)/h;     % point ij, k=0
             %Recvised by Kecai Cao 2016-11-09
             for m=1:i-1                                     % points i,j-k
@@ -81,10 +81,9 @@ for j = 1:(N-1)                 % 每一行
 				  c1_bdn = bndpara(1);
 				  c2_bdn = bndpara(2);
 				  A((j-1)*(M-1)+i,(j-1)*(M-1)+i) = (2*K-K/(1-hx*c2_bdn))*g(0)/h/2;%
-				  %A((j-1)*(M-1)+i,(j-1)*(M-1)+i+1) = K*g(1)/h;
-                  %A((j-1)*(M-1)+i,(j-1)*(M-1)+i+2) = K*g(2)/h;By Jianxiong
+				 
                   for l=1:M-2				   
-				   A((j-1)*(M-1)+i,(j-1)*(M-1)+i+l) = K*g(l)/h;%By Kecai 
+				   A((j-1)*(M-1)+i,(j-1)*(M-1)+i+l) = K*g(l)/h;%
                    end
 				  fb((j-1)*(M-1)+i) = K*c1_bdn/(1-hx*c2_bdn)/h;
                   end
@@ -97,9 +96,9 @@ for j = 1:(N-1)                 % 每一行
                     c_bdd = bndpara(1);        
                     A((j-1)*(M-1)+i, (j-1)*(M-1)+i) = K*g(0)/h;
                     %A((j-1)*(M-1)+i, (j-1)*(M-1)+i+1) = K*g(1)/h;
-                    %A((j-1)*(M-1)+i, (j-1)*(M-1)+i+2) = K*g(2)/h; Only effects of two dots has been used by jianxiong 
+                    %A((j-1)*(M-1)+i, (j-1)*(M-1)+i+2) = K*g(2)/h; Only effects of two dots has been used
                     for k=1:M-2
-                        A((j-1)*(M-1)+i, (j-1)*(M-1)+i-k) = K*g(k)/h;% effects of dots in x direction has been added by kecai
+                        A((j-1)*(M-1)+i, (j-1)*(M-1)+i-k) = K*g(k)/h;% effects of dots in x direction has been added 
                     end
                     fb((j-1)*(M-1)+i) = K*c_bdd/h;
 			    else	%Newmann boundary
@@ -107,7 +106,7 @@ for j = 1:(N-1)                 % 每一行
                     c2_bdn = bndpara(2);
                     A((j-1)*(M-1)+i, (j-1)*(M-1)+i) = (2*K-K/(1-hx*c2_bdn))*g(0)/h/2;%
                     % A((j-1)*(M-1)+i, (j-1)*(M-1)+i+1) = K*g(1)/h;
-                    % A((j-1)*(M-1)+i, (j-1)*(M-1)+i+2) = K*g(2)/h;  Only effects of two dots has been used by jianxiong
+                    % A((j-1)*(M-1)+i, (j-1)*(M-1)+i+2) = K*g(2)/h;  Only effects of two dots has been used
                     for k=1:M-2
                         A((j-1)*(M-1)+i,(j-1)*(M-1)+i-k) = K*g(k)/h;   %g_{alpha,k+1};% effects of dots in x direction has been added by kecai
                     end
@@ -115,11 +114,11 @@ for j = 1:(N-1)                 % 每一行
                 end
             end
 
-		if j~=1 && j~=(N-1) %in y dirction, (i,j) is not next to a boundary point%j为行变化
+		if j~=1 && j~=(N-1) %in y dirction, (i,j) is not next to a boundary point%j is col changes
 			%keyboard
                 A((j-1)*(M-1)+i, (j-1)*(M-1)+i) = A((j-1)*(M-1)+i,(j-1)*(M-1)+i) + ...
                     K*g(0)/h;
-				%Revised By Kecai Cao 2016-11-09 Derek Hollenbeck
+				%Revised By Derek Hollenbeck
 				%2021-01-08
                 for n=1:j-1   
                     if n == 1
@@ -147,7 +146,7 @@ for j = 1:(N-1)                 % 每一行
                 elseif bndtype==1	%Dirichlet boundary 
                         c_bdd = bndpara(1);
                         A((j-1)*(M-1)+i,(j-1)*(M-1)+i)=A((j-1)*(M-1)+i,(j-1)*(M-1)+i)+K*g(0)/h;
-                        %A((j-1)*(M-1)+i,(j-1)*(M-1)+i+(N-1))=K*g(1)/h;%Only effects of one dot used by jianxiong
+                        %A((j-1)*(M-1)+i,(j-1)*(M-1)+i+(N-1))=K*g(1)/h;%Only effects of one dot used
                        for l=1:N-2	
                             A((j-1)*(M-1)+i,(j-1)*(M-1)+i+l*(M-1))= A((j-1)*(M-1)+i,(j-1)*(M-1)+i+l*(M-1)) + ...
                                 K*g(l)/h; %effects of dots in right half of y direction
@@ -158,7 +157,7 @@ for j = 1:(N-1)                 % 每一行
                         c2_bdn = bndpara(2);
                         A((j-1)*(M-1)+i,(j-1)*(M-1)+i) = A((j-1)*(M-1)+i,(j-1)*(M-1)+i) + ...
                             (2*K-K/(1-hy*c2_bdn))*g(0)/h/2;
-                        %A((j-1)*(M-1)+i,(j-1)*(M-1)+i+(N-1)) = K*g(1)/h;%Only effects of one dot used by jianxiong
+                        %A((j-1)*(M-1)+i,(j-1)*(M-1)+i+(N-1)) = K*g(1)/h;%Only effects of one dot used
                         for l=1:N-2	
                             A((j-1)*(M-1)+i,(j-1)*(M-1)+i+l*(M-1))= A((j-1)*(M-1)+i,(j-1)*(M-1)+i+l*(M-1)) + ...
                                 K*g(l)/h; %effects of dots in right half of y direction

@@ -2,8 +2,8 @@
 % This code runs the FO-Diff-MAS2D code developed by ...
 % This script is edited by (dhollenbeck 12/29/2020)
 %....................................................
-%clear all
-% close all
+clear all
+close all
 
 global ttt1;
 ttt1 = clock;
@@ -38,7 +38,8 @@ sim('diffu_ctrl_simfrac_new', SIMTIME,OPTIONS)
 % sim('diffu_ctrl_sim', SIMTIME,OPTIONS);
 
 %% Post process simulation
-%post_process
+% post_process draw animation
+post_process
 save CVT_Consensus;
 disp('My program takes about:');
 disp(etime(clock,ttt1));

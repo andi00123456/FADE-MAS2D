@@ -19,10 +19,14 @@ N =30; %y axis is devided equally to N parts
 
 %% number of actuators, can be different from number of sensors
 NA=4;                               % number of actuators 
-global p_out  sum_s controlTime;
+global p_out  sum_s controlTime kp ki ks;
 p_out=zeros(NA,2);
 sum_s=zeros(NA,1);
 controlTime=0;
+
+ks = 8.99;
+kp = 0.1;
+ki = 0.1;
 
 global p_out_des  sum_s_des controlTime_des;
 p_out_des=rand(NA,2); %zeros(NA,2);
