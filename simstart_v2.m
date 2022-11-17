@@ -34,12 +34,12 @@ dT = 0.005;
 OPTIONS=simset('Solver', 'ode4', 'FixedStep', dT);
 
 %% Run simulation
-sim('diffu_ctrl_simfrac_new', SIMTIME,OPTIONS)
+simout = sim('diffu_ctrl_simfrac_new', SIMTIME,OPTIONS);
 % sim('diffu_ctrl_sim', SIMTIME,OPTIONS);
 
 %% Post process simulation
 % post_process draw animation
-post_process
+%post_process
 save CVT_Consensus;
 disp('My program takes about:');
 disp(etime(clock,ttt1));

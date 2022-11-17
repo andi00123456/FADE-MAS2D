@@ -5,6 +5,18 @@
 	x = 1/M:1/M:(1-1/M);
 	y =	 1/N:1/N:(1-1/N);
 	[X,Y] = meshgrid(x,y);
+
+    tout = simout.tout;
+    t = simout.t;
+    udot = simout.udot;
+    u = simout.u;
+    smove = simout.smove;
+    dinfo = simout.dinfo;
+    amove = simout.amove;
+    ActuatorDes = simout.ActuatorDes;
+    Control_Input = simout.Control_Input;
+    acceleration = simout.acceleration;
+
 	length_t = length(t);
 	for k = 1:PLOTSTEP:length_t
 % 		subplot(1,2,1)
@@ -87,9 +99,9 @@
         im = frame2im(frame);
         [imind,cm] = rgb2ind(im,256);
       if k == 1   
-          imwrite(imind,cm,'movie.gif','gif', 'Loopcount',inf);
+          imwrite(imind,cm,'two_new_movie.gif','gif', 'Loopcount',inf);
       else
-        imwrite(imind,cm,'movie.gif','gif','WriteMode','append');
+        imwrite(imind,cm,'two_new_movie.gif','gif','WriteMode','append');
       end
 %shg
 	end

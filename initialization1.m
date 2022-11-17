@@ -9,7 +9,8 @@
 K = 0.01;       % diffusion term
 alpha = 1.8;    % space fractional order
 bet = 0.8;      % time fractional order
-U = -0.1; V = 0.1;
+U = -0.15; V = -0.15;
+%U = 0; V = 0;
 tstar = 5;    % actuator position estimation based on \tilde(t)_*
 tstar2 = 5;   % spray control drift based on t_* 
 
@@ -37,7 +38,7 @@ controlTime_des=0;
 NS = (M-1)*(N-1);
 
 %% number of disturbances
-ND = 1;
+ND = 2;
 
 %% initial positions of actuators, number of rows should be equal to NA
 % PA0	= [0.5,  0.5;
@@ -125,11 +126,11 @@ BDD = [0, 0, 0, 1, 0;
 
 %% disturbances within boundary
 %the initial position of the ith disturbance is at [PD0(i,1),PD0(i,2)]
-PD0 = [0.7, 0.3];
-%PD0 = [0.3 0.3;
- %      0.7 0.7];
-%        0.3 0.7;
-%        0.7 0.3];
+%PD0 = [0.7, 0.3];
+PD0 = [0.3 0.3;
+       0.7 0.7];
+%       0.3 0.6;
+%       0.6 0.3];
 %PD0 = rand(4,2);
 %PD0 = [0.8, 0.2];
 %     0.2,0.8;
@@ -156,7 +157,7 @@ MEAN_SNOISE = 0;
 VAR_SNOISE = 0.04;
 
 %% simulation time
-SIMTIME =4;
+SIMTIME =4.5;
 
 %% SIMTIME = 97 %for standard crop duster.
 
